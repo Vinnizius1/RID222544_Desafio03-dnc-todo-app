@@ -61,3 +61,16 @@ body {
   /* O shorthand 'flex: 1' é popular e define flex-grow: 1, flex-shrink: 1, flex-basis: 0% */
   /* flex: 1; */
 }
+
+/* SEÇÃO LISTA DE TAREFAS */
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  flex-direction: column;
+}
