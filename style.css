@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  /* O fundo da página (área externa ao quadro) parece ser um cinza bem claro */
+  background-color: #f8f9fa;
+  /* Usamos uma fonte que se parece com o design */
+  font-family: "Inter", sans-serif;
+  color: #001747; /* Cor escura do texto */
+  font-size: 1.6rem; /* Garante que 1.6rem seja 16px de base */
+  min-height: 100vh; /* Opcional, mas garante que o body ocupe toda a altura da tela */
+}
+
+.mobile-board {
+  background-color: #ffffff; /* Fundo branco do painel */
+  max-width: 450px;
+  width: 90%; /* Garante que ocupe 90% em telas menores */
+  margin: 4rem auto; /* Centraliza o bloco na horizontal, com margem no topo e na base */
+  padding: 2rem; /* Espaçamento interno de 20px em todos os lados */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
+}
+
+#add-task-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 3rem; /* Espaço abaixo do formulário antes de começar a lista */
+}
+
+.task-input {
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #d9d9d9; /* Borda cinza claro */
+}
+
+#add-task-form input {
+  /* O shorthand 'flex: 1' é popular e define flex-grow: 1, flex-shrink: 1, flex-basis: 0% */
+  flex: 1;
+}

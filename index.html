@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="mobile-board">
+      <h1>Board de tarefas</h1>
+
+      <form id="add-task-form">
+        <input
+          type="text"
+          placeholder="Nome da tarefa"
+          id="task-name-input"
+          class="task-input"
+        />
+
+        <input
+          type="text"
+          placeholder="Etiqueta"
+          id="task-label-input"
+          class="task-input"
+        />
+
+        <button type="submit" id="add-task-btn">+</button>
+      </form>
+
+      <section class="task-list"></section>
+
+      <footer>
+        <p>1 tarefa concluída</p>
+      </footer>
+    </main>
+  </body>
+</html>
