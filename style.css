@@ -74,3 +74,26 @@ body {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   flex-direction: column;
 }
+
+.task-card h2 {
+  font-size: 1.8rem; /* Um pouco maior que o texto base (18px) */
+  font-weight: 600; /* Semibold para destaque */
+  color: #001747; /* Cor principal */
+  margin-bottom: 1rem; /* Espaço entre o título e os metadados */
+}
+
+/* Wrapper do Conteúdo: Garante que o texto ocupe o espaço necessário */
+.task-content-wrapper {
+  flex-grow: 1; /* Permite que o wrapper ocupe o máximo de espaço possível */
+  margin-right: 2rem; /* Cria um espaçamento entre o texto e o botão */
+}
+
+/* Container dos metadados */
+.task-metadata {
+  display: flex; /* Para alinhar a etiqueta e a data lado a lado */
+  flex-direction: column;
+  color: #7b8599; /* Um cinza claro para a data */
+  font-size: 1.4rem; /* 14px, menor que o texto base */
+  gap: 1.5rem; /* Espaçamento entre a etiqueta e a data */
+  margin-bottom: 0.5rem; /* Um pouco de espaço se houver conteúdo abaixo */
+}
