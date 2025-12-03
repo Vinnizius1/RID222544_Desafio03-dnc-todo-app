@@ -92,8 +92,37 @@ body {
 .task-metadata {
   display: flex; /* Para alinhar a etiqueta e a data lado a lado */
   flex-direction: column;
-  color: #7b8599; /* Um cinza claro para a data */
+  color: #b1bacb; /* Um cinza claro para a data */
   font-size: 1.4rem; /* 14px, menor que o texto base */
-  gap: 1.5rem; /* Espaçamento entre a etiqueta e a data */
-  margin-bottom: 0.5rem; /* Um pouco de espaço se houver conteúdo abaixo */
+  gap: 0.5rem; /* Espaçamento entre a etiqueta e a data */
+  margin-bottom: 1rem; /* Um pouco de espaço se houver conteúdo abaixo */
+}
+
+.task-label {
+  /* Aparência de "chip" / "pill" */
+  display: inline-block; /* Para que o padding e a largura funcionem bem */
+  padding: 0.4rem 0.8rem; /* Espaçamento interno pequeno (topo/base e laterais) */
+  border-radius: 50px; /* Bordas bem arredondadas (faz a forma de pílula) */
+  font-size: 1.2rem; /* Texto pequeno (12px) */
+  font-weight: 500;
+  width: fit-content;
+
+  /* color: #b1bacb; */
+  border: 1px solid #b1bacb; /* Borda de 1px com a mesma cor do texto */
+
+  /* Garantir que não encolha */
+  flex-shrink: 0;
+}
+
+.complete-btn {
+  background-color: #2d70fd; /* O azul primário */
+  color: #ffffff; /* Texto branco */
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2.5rem; /* Espaçamento interno (horizontal maior que vertical) */
+  cursor: pointer;
+  font-weight: 500;
+
+  /* Garante que o botão não encolha em telas apertadas */
+  flex-shrink: 0;
 }
