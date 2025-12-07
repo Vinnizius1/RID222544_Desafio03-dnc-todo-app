@@ -138,3 +138,13 @@ footer p {
   font-size: 1.4rem; /* Texto pequeno (14px) */
   font-weight: 500;
 }
+
+.task-card.completed h2 {
+  text-decoration: line-through;
+  color: #b1bacb;
+}
+
+.task-card.completed .complete-btn {
+  background-color: transparent;
+  padding: 0;
+}
