@@ -126,3 +126,15 @@ body {
   /* Garante que o botão não encolha em telas apertadas */
   flex-shrink: 0;
 }
+
+footer {
+  padding: 1.5rem 0 0; /* Espaçamento no topo para separar da lista de tarefas */
+  text-align: left; /* Alinhamento padrão do mobile-first */
+  margin-top: 2rem; /* Espaço entre o último card e o footer */
+}
+
+footer p {
+  color: #b1bacb; /* Cinza claro, a mesma cor que usamos na borda da etiqueta */
+  font-size: 1.4rem; /* Texto pequeno (14px) */
+  font-weight: 500;
+}
