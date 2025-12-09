@@ -5,7 +5,9 @@ const form = document.getElementById("add-task-form");
 const taskNameInput = document.getElementById("task-name-input");
 const taskLabelInput = document.getElementById("task-label-input");
 const taskList = document.querySelector(".task-list");
-const footer = document.querySelector("footer p");
+const footer = document.querySelector("footer");
+const footerContent = document.querySelector("footer p");
+const deleteAllBtn = document.getElementById("delete-all-btn");
 
 // Chave para localStorage
 const TASKS_STORAGE_KEY = "tasks";
@@ -48,9 +50,12 @@ function saveTasks() {
 // Atualiza o contador do footer
 function updateFooter() {
   const completedCount = tasks.filter((t) => t.completed).length;
-  footer.textContent = `${completedCount} tarefa${
+  footerContent.textContent = `${completedCount} tarefa${
     completedCount !== 1 ? "s" : ""
   } concluída${completedCount !== 1 ? "s" : ""}`;
+  
+  // Mostra ou esconde botão de deletar todas conforme há tarefas
+  deleteAllBtn.style.display = tasks.length > 0 ? "block" : "none";
 }
 
 // Cria o elemento de um card de tarefa
@@ -89,32 +94,52 @@ function createTaskElement(task, index) {
   contentWrapper.appendChild(header);
   contentWrapper.appendChild(metadata);
 
+  // Container de botões
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.classList.add("task-buttons");
+
   // Botão de concluir / concluído
-  const button = document.createElement("button");
-  button.classList.add("complete-btn");
-  button.setAttribute("type", "button");
-  button.setAttribute("aria-pressed", task.completed ? "true" : "false");
-  button.setAttribute(
+  const completeButton = document.createElement("button");
+  completeButton.classList.add("complete-btn");
+  completeButton.setAttribute("type", "button");
+  completeButton.setAttribute("aria-pressed", task.completed ? "true" : "false");
+  completeButton.setAttribute(
     "title",
     task.completed ? "Tarefa concluída" : "Concluir tarefa"
   );
 
   // Define conteúdo e classe conforme estado
   if (task.completed) {
-    button.classList.add("complete-btn--done");
-    button.innerHTML = `<img src="assets/checked.svg" alt="Concluída" />`;
+    completeButton.classList.add("complete-btn--done");
+    completeButton.innerHTML = `<img src="assets/checked.svg" alt="Concluída" />`;
   } else {
-    button.textContent = "Concluir";
+    completeButton.textContent = "Concluir";
   }
 
   // Alterna o estado ao clicar
-  button.addEventListener("click", () => {
+  completeButton.addEventListener("click", () => {
     tasks[index].completed = !tasks[index].completed;
     renderTasks();
   });
 
+  // Botão de deletar tarefa
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete-btn");
+  deleteButton.setAttribute("type", "button");
+  deleteButton.setAttribute("title", "Deletar tarefa");
+  deleteButton.setAttribute("aria-label", "Deletar tarefa");
+  deleteButton.innerHTML = `<img src="assets/trash.svg" alt="Deletar" />`;
+
+  // Remove a tarefa ao clicar
+  deleteButton.addEventListener("click", () => {
+    deleteTask(index);
+  });
+
+  buttonsContainer.appendChild(completeButton);
+  buttonsContainer.appendChild(deleteButton);
+
   article.appendChild(contentWrapper);
-  article.appendChild(button);
+  article.appendChild(buttonsContainer);
 
   return article;
 }
@@ -128,6 +153,26 @@ function renderTasks() {
   });
   updateFooter();
   saveTasks();
+}
+
+// Deleta uma tarefa específica
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  renderTasks();
+}
+
+// Deleta todas as tarefas com confirmação
+function deleteAllTasks() {
+  if (tasks.length === 0) return;
+  
+  const confirmDelete = confirm(
+    "Tem certeza que deseja deletar todas as tarefas? Esta ação não pode ser desfeita."
+  );
+  
+  if (confirmDelete) {
+    tasks = [];
+    renderTasks();
+  }
 }
 
 // Submissão do formulário: cria tarefa
@@ -162,6 +207,9 @@ form.addEventListener("submit", (event) => {
 
   renderTasks();
 });
+
+// Event listener para deletar todas as tarefas
+deleteAllBtn.addEventListener("click", deleteAllTasks);
 
 // Inicializa
 loadTasks();

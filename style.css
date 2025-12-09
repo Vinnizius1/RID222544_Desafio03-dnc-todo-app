@@ -185,12 +185,41 @@ footer {
   margin-top: 2rem; /* Espaço entre o último card e o footer */
 }
 
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
 footer p {
   color: #b1bacb; /* Cinza claro, a mesma cor que usamos na borda da etiqueta */
   font-size: 1.4rem; /* Texto pequeno (14px) */
   font-weight: 500;
   letter-spacing: -0.2px;
   line-height: 1.4;
+}
+
+.delete-all-btn {
+  background-color: transparent;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+  border-radius: 8px;
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.3rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.delete-all-btn:hover {
+  background-color: #d32f2f;
+  color: #ffffff;
+}
+
+.delete-all-btn:active {
+  transform: scale(0.95);
 }
 
 .task-card.completed h2 {
@@ -201,6 +230,40 @@ footer p {
 .task-card.completed .complete-btn {
   background-color: transparent;
   padding: 0;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.2rem;
+  width: 100%;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.delete-btn:hover {
+  background-color: #ffe6e6;
+}
+
+.delete-btn:active {
+  transform: scale(0.9);
+}
+
+.delete-btn img {
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 /* Estilos padrão (mobile-first) já estão definidos acima */
@@ -237,6 +300,20 @@ footer p {
     flex-direction: row; /* etiqueta e data lado a lado */
     gap: 2rem; /* mais espaçamento entre eles */
     margin-bottom: 0; /* remove espaço extra */
+  }
+
+  .task-buttons {
+    flex-direction: row;
+    margin-top: 0;
+    justify-content: flex-end;
+    width: auto;
+    gap: 1.2rem;
+  }
+
+  .footer-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
