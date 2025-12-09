@@ -11,10 +11,12 @@
 body {
   /* O fundo da página (área externa ao quadro) parece ser um cinza bem claro */
   background-color: #f8f9fa;
-  /* Usamos uma fonte que se parece com o design */
-  font-family: "Inter", sans-serif;
+  /* Rubik é a fonte definida no Figma */
+  font-family: "Rubik", sans-serif;
   color: #001747; /* Cor escura do texto */
   font-size: 1.6rem; /* Garante que 1.6rem seja 16px de base */
+  font-weight: 400;
+  line-height: 1.5;
   min-height: 100vh; /* Opcional, mas garante que o body ocupe toda a altura da tela */
 }
 
@@ -23,11 +25,18 @@ body {
   max-width: 450px;
   width: 90%; /* Garante que ocupe 90% em telas menores */
   margin: 4rem auto; /* Centraliza o bloco na horizontal, com margem no topo e na base */
-  padding: 2rem; /* Espaçamento interno de 20px em todos os lados */
+  padding: 2.4rem; /* Espaçamento interno melhorado */
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
 }
 
+#add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  margin-bottom: 3.2rem; /* Espaço abaixo do formulário antes de começar a lista */
+}
 #add-task-form {
   display: flex;
   flex-direction: column;
@@ -38,9 +47,24 @@ body {
 
 .task-input {
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1rem 1.2rem;
   border: 1px solid #d9d9d9; /* Borda cinza claro */
   width: 100%;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #001747;
+  transition: border-color 0.2s ease;
+}
+
+.task-input::placeholder {
+  color: #b1bacb;
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: #2d70fd;
+  box-shadow: 0 0 0 3px rgba(45, 112, 253, 0.1);
 }
 
 #add-task-btn {
@@ -50,20 +74,37 @@ body {
   border-radius: 8px;
   cursor: pointer;
   width: 100%;
-  height: 4rem;
+  height: 4.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-#add-task-form input {
-  /* O shorthand 'flex: 1' é popular e define flex-grow: 1, flex-shrink: 1, flex-basis: 0% */
-  /* flex: 1; */
+#add-task-btn:hover {
+  background-color: #1e5ad8;
 }
-
-/* SEÇÃO LISTA DE TAREFAS */
 .task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 2rem 2.4rem;
+  border-radius: 8px;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  flex-direction: column;
+  border: 1px solid #f0f1f3;
+  transition: box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+* SEÇÃO LISTA DE TAREFAS */ .task-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,10 +117,12 @@ body {
 }
 
 .task-card h2 {
-  font-size: 1.8rem; /* Um pouco maior que o texto base (18px) */
+  font-size: 1.6rem; /* Ajustado para melhor proporção */
   font-weight: 600; /* Semibold para destaque */
   color: #001747; /* Cor principal */
-  margin-bottom: 1rem; /* Espaço entre o título e os metadados */
+  margin-bottom: 1.2rem; /* Espaço entre o título e os metadados */
+  line-height: 1.4;
+  letter-spacing: -0.3px;
 }
 
 /* Wrapper do Conteúdo: Garante que o texto ocupe o espaço necessário */
@@ -93,24 +136,24 @@ body {
   display: flex; /* Para alinhar a etiqueta e a data lado a lado */
   flex-direction: column;
   color: #b1bacb; /* Um cinza claro para a data */
-  font-size: 1.4rem; /* 14px, menor que o texto base */
-  gap: 0.5rem; /* Espaçamento entre a etiqueta e a data */
-  margin-bottom: 1rem; /* Um pouco de espaço se houver conteúdo abaixo */
-}
-
-.task-label {
-  /* Aparência de "chip" / "pill" */
-  display: inline-block; /* Para que o padding e a largura funcionem bem */
-  padding: 0.4rem 0.8rem; /* Espaçamento interno pequeno (topo/base e laterais) */
-  border-radius: 50px; /* Bordas bem arredondadas (faz a forma de pílula) */
-  font-size: 1.2rem; /* Texto pequeno (12px) */
-  font-weight: 500;
-  width: fit-content;
-
-  /* color: #b1bacb; */
-  border: 1px solid #b1bacb; /* Borda de 1px com a mesma cor do texto */
-
-  /* Garantir que não encolha */
+  font-size: 1.3rem; /* 13px, menor que o texto base */
+  gap: 0.6rem; /* Espaçamento entre a etiqueta e a data */
+  margin-bottom: 1.2rem; /* Um pouco de espaço se houver conteúdo abaixo */
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  .task-label {
+    /* Aparência de "chip" / "pill" */
+    display: inline-block; /* Para que o padding e a largura funcionem bem */
+    padding: 0.5rem 1rem; /* Espaçamento interno pequeno (topo/base e laterais) */
+    border-radius: 50px; /* Bordas bem arredondadas (faz a forma de pílula) */
+    font-size: 1.2rem; /* Texto pequeno (12px) */
+    font-weight: 500;
+    width: fit-content;
+    color: #b1bacb;
+    border: 1px solid #b1bacb; /* Borda de 1px com a mesma cor do texto */
+    flex-shrink: 0;
+    letter-spacing: -0.2px;
+  } /* Garantir que não encolha */
   flex-shrink: 0;
 }
 
@@ -119,12 +162,21 @@ body {
   color: #ffffff; /* Texto branco */
   border: none;
   border-radius: 8px;
-  padding: 1rem 2.5rem; /* Espaçamento interno (horizontal maior que vertical) */
+  padding: 0.8rem 2.4rem; /* Espaçamento interno (horizontal maior que vertical) */
   cursor: pointer;
   font-weight: 500;
-
-  /* Garante que o botão não encolha em telas apertadas */
+  font-family: "Rubik", sans-serif;
+  font-size: 1.4rem;
   flex-shrink: 0;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.complete-btn:hover:not(.complete-btn--done) {
+  background-color: #1e5ad8;
+}
+
+.complete-btn:active:not(.complete-btn--done) {
+  transform: scale(0.95);
 }
 
 footer {
@@ -137,6 +189,8 @@ footer p {
   color: #b1bacb; /* Cinza claro, a mesma cor que usamos na borda da etiqueta */
   font-size: 1.4rem; /* Texto pequeno (14px) */
   font-weight: 500;
+  letter-spacing: -0.2px;
+  line-height: 1.4;
 }
 
 .task-card.completed h2 {
@@ -147,4 +201,62 @@ footer p {
 .task-card.completed .complete-btn {
   background-color: transparent;
   padding: 0;
+}
+
+/* Estilos padrão (mobile-first) já estão definidos acima */
+
+/* Ajustes para telas maiores */
+@media (min-width: 1024px) {
+  .mobile-board {
+    max-width: 900px; /* aumenta a largura do quadro */
+    padding: 3rem; /* mais espaço interno */
+  }
+
+  .task-card {
+    flex-direction: row; /* muda para linha */
+    align-items: center; /* centraliza verticalmente */
+    justify-content: space-between; /* conteúdo à esquerda, botão à direita */
+    padding: 2rem 3rem; /* mais espaço lateral */
+  }
+
+  .task-content-wrapper {
+    margin-right: 3rem; /* aumenta o espaço entre texto e botão */
+  }
+
+  .complete-btn {
+    height: 4rem;
+    padding: 0 2rem; /* botão mais compacto horizontalmente */
+    font-size: 1.6rem;
+  }
+
+  .task-card h2 {
+    margin-bottom: 0.5rem; /* menos espaço já que está em linha */
+  }
+
+  .task-metadata {
+    flex-direction: row; /* etiqueta e data lado a lado */
+    gap: 2rem; /* mais espaçamento entre eles */
+    margin-bottom: 0; /* remove espaço extra */
+  }
+}
+
+/* Botão quando a tarefa estiver concluída */
+/* .complete-btn--done {
+  background-color: #22c55e;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem; 
+}
+ */
+
+/* Opcional: estado do card completo já existe, mantemos para o texto riscado */
+.task-card.completed h2 {
+  text-decoration: line-through;
+  color: #b1bacb;
 }

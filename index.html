@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Board de Tarefas</title>
   </head>
   <body>
     <main class="mobile-board">
@@ -28,47 +34,12 @@
         <button type="submit" id="add-task-btn">+</button>
       </form>
 
-      <section class="task-list">
-        <article class="task-card completed">
-          <div class="task-content-wrapper">
-            <div class="task-header">
-              <h2>Implementar tela de listagem de tarefas</h2>
-            </div>
-
-            <div class="task-metadata">
-              <span class="task-label frontend">Frontend</span>
-              <p class="task-date">
-                Criado em: <time datetime="2025-12-03">03/12/2025</time>
-              </p>
-            </div>
-          </div>
-
-          <button class="complete-btn">
-            <img src="assets/checked.svg" alt="checked" />
-          </button>
-        </article>
-
-        <article class="task-card">
-          <div class="task-content-wrapper">
-            <div class="task-header">
-              <h2>Implementar botão de concluir tarefa</h2>
-            </div>
-
-            <div class="task-metadata">
-              <span class="task-label frontend">Frontend</span>
-              <p class="task-date">
-                Criado em: <time datetime="2025-12-03">03/12/2025</time>
-              </p>
-            </div>
-          </div>
-
-          <button class="complete-btn">Concluir</button>
-        </article>
-      </section>
+      <section class="task-list"></section>
 
       <footer>
-        <p>1 tarefa concluída</p>
+        <p>0 tarefas concluídas</p>
       </footer>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
