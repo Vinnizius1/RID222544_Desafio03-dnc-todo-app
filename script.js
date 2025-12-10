@@ -15,31 +15,11 @@ const TASKS_STORAGE_KEY = "tasks";
 // Estado das tarefas (array de objetos)
 let tasks = [];
 
-// Carrega tarefas do localStorage ou usa dados padrão
+// Carrega tarefas do localStorage
 function loadTasks() {
   const savedTasks = localStorage.getItem(TASKS_STORAGE_KEY);
-
-  if (savedTasks) {
-    tasks = JSON.parse(savedTasks);
-  } else {
-    // Dados padrão para primeira visualização
-    tasks = [
-      {
-        name: "Implementar tela de listagem de tarefas",
-        label: "Frontend",
-        dateISO: "2025-12-03",
-        date: "03/12/2025",
-        completed: true,
-      },
-      {
-        name: "Implementar botão de concluir tarefa",
-        label: "Frontend",
-        dateISO: "2025-12-03",
-        date: "03/12/2025",
-        completed: false,
-      },
-    ];
-  }
+  // Se existe algo no localStorage, carrega, senão inicia com array vazio
+  tasks = savedTasks ? JSON.parse(savedTasks) : [];
 }
 
 // Salva tarefas no localStorage
@@ -53,7 +33,7 @@ function updateFooter() {
   footerContent.textContent = `${completedCount} tarefa${
     completedCount !== 1 ? "s" : ""
   } concluída${completedCount !== 1 ? "s" : ""}`;
-  
+
   // Mostra ou esconde botão de deletar todas conforme há tarefas
   deleteAllBtn.style.display = tasks.length > 0 ? "block" : "none";
 }
@@ -102,7 +82,10 @@ function createTaskElement(task, index) {
   const completeButton = document.createElement("button");
   completeButton.classList.add("complete-btn");
   completeButton.setAttribute("type", "button");
-  completeButton.setAttribute("aria-pressed", task.completed ? "true" : "false");
+  completeButton.setAttribute(
+    "aria-pressed",
+    task.completed ? "true" : "false"
+  );
   completeButton.setAttribute(
     "title",
     task.completed ? "Tarefa concluída" : "Concluir tarefa"
@@ -132,6 +115,7 @@ function createTaskElement(task, index) {
 
   // Remove a tarefa ao clicar
   deleteButton.addEventListener("click", () => {
+    if (!confirm("Tem certeza que deseja deletar esta tarefa?")) return;
     deleteTask(index);
   });
 
@@ -164,11 +148,11 @@ function deleteTask(index) {
 // Deleta todas as tarefas com confirmação
 function deleteAllTasks() {
   if (tasks.length === 0) return;
-  
+
   const confirmDelete = confirm(
     "Tem certeza que deseja deletar todas as tarefas? Esta ação não pode ser desfeita."
   );
-  
+
   if (confirmDelete) {
     tasks = [];
     renderTasks();
