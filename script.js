@@ -14,15 +14,34 @@ const TASKS_STORAGE_KEY = "tasks";
 
 let tasks = [];
 
-// Carrega tarefas do localStorage
-function loadTasks() {
-  const savedTasks = localStorage.getItem(TASKS_STORAGE_KEY);
-  tasks = savedTasks ? JSON.parse(savedTasks) : [];
+// Sanitiza input para prevenir injeção de caracteres perigosos
+function sanitizeInput(value) {
+  return value.trim().replace(/[<>\"']/g, "");
 }
 
-// Salva tarefas no localStorage
+// Carrega tarefas do localStorage com tratamento de erro
+function loadTasks() {
+  try {
+    const savedTasks = localStorage.getItem(TASKS_STORAGE_KEY);
+    tasks = savedTasks ? JSON.parse(savedTasks) : [];
+  } catch (error) {
+    console.error("Erro ao carregar tarefas do armazenamento:", error);
+    tasks = [];
+  }
+}
+
+// Salva tarefas no localStorage com validação de quota
 function saveTasks() {
-  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+  try {
+    localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+  } catch (error) {
+    if (error.name === "QuotaExceededError" || error.code === 22) {
+      console.error("Limite de armazenamento local excedido.");
+      alert("Limite de armazenamento atingido! Exclua algumas tarefas.");
+    } else {
+      console.error("Erro ao salvar tarefas:", error);
+    }
+  }
 }
 
 // Atualiza o contador do footer
@@ -62,7 +81,13 @@ function createTaskElement(task, index) {
   const date = document.createElement("p");
   date.classList.add("task-date");
   // Para coerência visual, usamos data em PT-BR no display
-  date.innerHTML = `Criado em: <time datetime="${task.dateISO}">${task.date}</time>`;
+  const timeElement = document.createElement("time");
+  timeElement.setAttribute("datetime", task.dateISO);
+  timeElement.textContent = task.date;
+
+  const dateLabel = document.createTextNode("Criado em: ");
+  date.appendChild(dateLabel);
+  date.appendChild(timeElement);
 
   metadata.appendChild(label);
   metadata.appendChild(date);
@@ -157,8 +182,8 @@ function deleteAllTasks() {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const name = taskNameInput.value.trim();
-  const label = taskLabelInput.value.trim();
+  const name = sanitizeInput(taskNameInput.value);
+  const label = sanitizeInput(taskLabelInput.value);
 
   if (!name || !label) {
     alert("Por favor, preencha nome e etiqueta da tarefa.");
