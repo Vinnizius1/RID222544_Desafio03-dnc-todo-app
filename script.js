@@ -114,7 +114,10 @@ function createTaskElement(task, index) {
   // Define conteúdo e classe conforme estado
   if (task.completed) {
     completeButton.classList.add("complete-btn--done");
-    completeButton.innerHTML = `<img src="assets/checked.svg" alt="Concluída" />`;
+    const completeIcon = document.createElement("img");
+    completeIcon.src = "assets/checked.svg";
+    completeIcon.alt = "Concluída";
+    completeButton.appendChild(completeIcon);
   } else {
     completeButton.textContent = "Concluir";
   }
@@ -130,7 +133,10 @@ function createTaskElement(task, index) {
   deleteButton.setAttribute("type", "button");
   deleteButton.setAttribute("title", "Deletar tarefa");
   deleteButton.setAttribute("aria-label", "Deletar tarefa");
-  deleteButton.innerHTML = `<img src="assets/trash.svg" alt="Deletar" />`;
+  const deleteIcon = document.createElement("img");
+  deleteIcon.src = "assets/trash.svg";
+  deleteIcon.alt = "Deletar";
+  deleteButton.appendChild(deleteIcon);
 
   // Confirma exclusão da tarefa
   deleteButton.addEventListener("click", () => {
@@ -149,7 +155,10 @@ function createTaskElement(task, index) {
 
 // Atualiza lista completa (renderização + persistência)
 function renderTasks() {
-  taskList.innerHTML = "";
+  // Limpa a lista de forma segura para evitar XSS
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
   tasks.forEach((task, index) => {
     const el = createTaskElement(task, index);
     taskList.appendChild(el);

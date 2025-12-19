@@ -96,8 +96,8 @@ Documentação detalhada do fluxo de funcionamento do aplicativo.
 └────────────┬─────────────────────────────┘
              │
     ┌────────▼─────────────────┐
-    │ Limpa HTML anterior       │
-    │ taskList.innerHTML = ""   │
+    │ Limpa a lista de tarefas │
+    │ (remove nós filhos)      │
     └────────┬──────────────────┘
              │
     ┌────────▼──────────────────────┐
