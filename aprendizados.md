@@ -1,27 +1,61 @@
-📝 Resumo: HTML Semântico e "Div Soup"
-"Div Soup" (Sopa de Divs): Termo usado para descrever o uso excessivo e desnecessário de tags <div> para envolver quase todos os elementos em um projeto.
+﻿##  HTML Semântico vs. "Div Soup"
 
-Problema: Esse excesso de divs torna o código menos legível para humanos e máquinas, além de reduzir a semântica (significado) e prejudicar a acessibilidade do projeto.
+Use tags semânticas (`<article>`, `<header>`, `<footer>`) em vez de excesso de `<div>`. Isso melhora:
+- Legibilidade do código
+- Acessibilidade e SEO
+- Possibilidade de layout com Flexbox/Grid direto nas tags semânticas
 
-Melhor Prática: Priorize o uso de tags HTML semânticas (<header>, <main>, <form>, <section>, <article>, <footer>) sempre que possível.
-
-Flexbox/Grid: Com o CSS moderno, podemos estilizar e posicionar as tags semânticas diretamente. Isso elimina a necessidade de wrappers <div> para a maioria dos layouts.
-
-Regra de Ouro: Use a <div> apenas quando não houver uma tag semântica mais apropriada e você precisar de um container genérico para fins de agrupamento ou controle de layout (ex: o pai de um Flexbox).
+**Regra:** `<div>` apenas quando não houver tag semântica apropriada.
 
 ---
 
-📏 px vs. rem em Border-Radius
-Essa é uma pergunta excelente e muito relevante para a prática.
+##  Sistema de Espaçamento (1rem = 10px)
 
-O motivo principal é a distinção entre unidades relativas e absolutas no contexto de elementos não-textuais:
+Com `font-size: 62.5%` no `:root`, use múltiplos de 0.4rem:
+- `0.8rem` = 8px (padding padrão)
+- `1.2rem` = 12px (gaps)
+- `1.6rem` = 16px (gaps maiores)
+- `2.4rem` = 24px (containers)
 
-O que é REM?
-Relativo: O rem é relativo ao tamanho da fonte do elemento raiz (<html>). Se o seu <html> tem font-size: 16px (padrão do navegador), 1rem é 16px. Se o usuário aumentar o tamanho da fonte padrão nas configurações de acessibilidade do navegador, o rem escala junto.
+Mantém harmonia visual e facilita ajustes futuros.
 
-Por que PX é usado?
-Consistência Visual: O border-radius define o formato visual de um canto. Ao usar px, você garante que o canto arredondado tenha o tamanho exato de 8 pixels, independentemente de o usuário ter aumentado o zoom do texto ou o tamanho da fonte padrão.
+---
 
-Estrutura vs. Conteúdo: Muitos desenvolvedores preferem usar px para elementos de estrutura visual (como bordas, sombras e, às vezes, larguras e alturas fixas) e rem para elementos de conteúdo e espaçamento (font-size, padding, margin). Isso permite que o texto seja acessível e escalável, mas mantém a estrutura básica do layout rígida e consistente.
+##  Tipografia e Cores
 
-Em resumo, usar px em border-radius garante que o arredondamento de 8 pixels seja sempre 8 pixels, mantendo a fidelidade exata ao design.
+**Google Fonts:** Use `<link preconnect>` antes do import para melhor performance. Carregue apenas os pesos necessários (ex: `wght@400;500;600;700`).
+
+**Paleta:**
+- **Azul primário:** `#2d70fd` (botões principais)
+- **Vermelho:** `#d32f2f` (ações destrutivas)
+- **Texto:** `#001747` (alto contraste)
+- **Cinza:** `#b1bacb` (metadados)
+
+---
+
+##  Detalhes que Fazem Diferença
+
+1. **`box-sizing: border-box`**  Padding e border não aumentam a largura
+2. **Letter-spacing negativo** (`-0.3px`) em títulos  Aparência mais refinada
+3. **Sombras leves** (`box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08)`)  Profundidade
+4. **Transições suaves** (`0.2s ease`)  Feedback visual sem delay
+5. **Feedback visual em interações**  Hover, focus, active com `transform` e cores
+
+---
+
+##  Mobile-First com Flexbox
+
+- Mobile: `flex-direction: column`
+- Desktop: `flex-direction: row` com `@media (min-width: 1024px)`
+
+Sem necessidade de múltiplas media queries.
+
+---
+
+##  Padrão Reutilizável
+
+Este projeto serve como base para CRUD simples com:
+- HTML semântico + BEM leve (`.task-card`, `.complete-btn`)
+- CSS com sistema de espaçamento consistente
+- LocalStorage para persistência
+- Padrão mobile-first

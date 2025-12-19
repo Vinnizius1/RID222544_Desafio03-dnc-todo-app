@@ -1,6 +1,6 @@
 // script.js
 
-// Seletores principais
+// DOM elements
 const form = document.getElementById("add-task-form");
 const taskNameInput = document.getElementById("task-name-input");
 const taskLabelInput = document.getElementById("task-label-input");
@@ -9,16 +9,14 @@ const footer = document.querySelector("footer");
 const footerContent = document.querySelector("footer p");
 const deleteAllBtn = document.getElementById("delete-all-btn");
 
-// Chave para localStorage
+// Persistência de dados
 const TASKS_STORAGE_KEY = "tasks";
 
-// Estado das tarefas (array de objetos)
 let tasks = [];
 
 // Carrega tarefas do localStorage
 function loadTasks() {
   const savedTasks = localStorage.getItem(TASKS_STORAGE_KEY);
-  // Se existe algo no localStorage, carrega, senão inicia com array vazio
   tasks = savedTasks ? JSON.parse(savedTasks) : [];
 }
 
@@ -34,7 +32,6 @@ function updateFooter() {
     completedCount !== 1 ? "s" : ""
   } concluída${completedCount !== 1 ? "s" : ""}`;
 
-  // Mostra ou esconde botão de deletar todas conforme há tarefas
   deleteAllBtn.style.display = tasks.length > 0 ? "block" : "none";
 }
 
@@ -44,7 +41,6 @@ function createTaskElement(task, index) {
   article.classList.add("task-card");
   if (task.completed) article.classList.add("completed");
 
-  // Conteúdo
   const contentWrapper = document.createElement("div");
   contentWrapper.classList.add("task-content-wrapper");
 
@@ -74,7 +70,6 @@ function createTaskElement(task, index) {
   contentWrapper.appendChild(header);
   contentWrapper.appendChild(metadata);
 
-  // Container de botões
   const buttonsContainer = document.createElement("div");
   buttonsContainer.classList.add("task-buttons");
 
@@ -99,7 +94,6 @@ function createTaskElement(task, index) {
     completeButton.textContent = "Concluir";
   }
 
-  // Alterna o estado ao clicar
   completeButton.addEventListener("click", () => {
     tasks[index].completed = !tasks[index].completed;
     renderTasks();
@@ -113,7 +107,7 @@ function createTaskElement(task, index) {
   deleteButton.setAttribute("aria-label", "Deletar tarefa");
   deleteButton.innerHTML = `<img src="assets/trash.svg" alt="Deletar" />`;
 
-  // Remove a tarefa ao clicar
+  // Confirma exclusão da tarefa
   deleteButton.addEventListener("click", () => {
     if (!confirm("Tem certeza que deseja deletar esta tarefa?")) return;
     deleteTask(index);
@@ -128,7 +122,7 @@ function createTaskElement(task, index) {
   return article;
 }
 
-// Renderiza toda a lista
+// Atualiza lista completa (renderização + persistência)
 function renderTasks() {
   taskList.innerHTML = "";
   tasks.forEach((task, index) => {
@@ -171,7 +165,6 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  // Data em dois formatos: ISO para atributo e exibida em PT-BR
   const now = new Date();
   const dateISO = now.toISOString().split("T")[0];
   const dateDisplay = now.toLocaleDateString("pt-BR");
@@ -192,9 +185,8 @@ form.addEventListener("submit", (event) => {
   renderTasks();
 });
 
-// Event listener para deletar todas as tarefas
 deleteAllBtn.addEventListener("click", deleteAllTasks);
 
-// Inicializa
+// Inicializa aplicação
 loadTasks();
 renderTasks();
