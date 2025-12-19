@@ -6,7 +6,7 @@ Um aplicativo moderno e intuitivo para gerenciar suas tarefas do dia a dia. Com 
 
 ## Live Demo & Figma
 
-- **Live Site**: Abra `index.html` localmente no seu navegador
+- **Live Site**: [Netlify] (https://desafio03-dnc-rid222544.netlify.app/)
 - **Figma Design**: [Acesse o protótipo do projeto](https://www.figma.com/design/GZzqLg5ATOLfOh7Ea7Guee/Desafio---Board-de-Tarefas-DNC?node-id=1-49&t=gEFDeujY2VrhSM6S-1)
 
 ---
