@@ -200,7 +200,7 @@ form.addEventListener("submit", (event) => {
   }
 
   const now = new Date();
-  const dateISO = now.toISOString().split("T")[0];
+  const dateISO = now.toLocaleDateString("sv-SE");
   const dateDisplay = now.toLocaleDateString("pt-BR");
 
   const newTask = {
